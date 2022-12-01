@@ -19,13 +19,13 @@ std::vector<std::vector<int>> generate(int numRows)
 }
 int main()
 {
-    int n = 5;
+    int n = 10;
     std::vector<std::vector<int>> res = generate(n);
     for (int i = 0; i < res.size(); i++)
     {
         for (int j = 0; j < res[i].size(); j++)
         {
-            std::cout << res[i][j];
+            std::cout << res[i][j] << " ";
         }
         std::cout << std::endl;
     }

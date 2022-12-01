@@ -1,31 +1,32 @@
 #include <iostream>
 #include <vector>
 
-int dp[34][34];
-
 std::vector<int> getRow(int rowIndex)
 {
-    dp[0][0] = 1;
-    for (int i = 1; i <= rowIndex; i++)
+    std::vector<int> res(rowIndex + 1);
+    res[0] = res[rowIndex] = 1;
+    int left = 1;
+    int right = rowIndex - 1;
+    long long temp = 1;
+    int numerator = rowIndex; // numerator -> tuSo
+    int denominator = 1;      // denominator -> mauSo
+    while (left <= right)
     {
-        dp[i][0] = 1;
-        dp[i][i] = 1;
-        for (int j = 1; j < i; j++)
-        {
-            dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
-        }
-    }
-    std::vector<int> res;
-    for (int i = 0; i <= rowIndex; i++)
-    {
-        res.push_back(dp[rowIndex][i]);
+        temp *= numerator;
+        temp /= denominator;
+        res[left] = res[right] = temp;
+        numerator--;
+        denominator++;
+        left++;
+        right--;
     }
     return res;
 }
 
 int main()
 {
-    int rowIndex = 4;
+    // std::cout << factorial(5) << std::endl;
+    int rowIndex = 33;
     std::vector<int> res = getRow(rowIndex);
     for (std::vector<int>::iterator i = res.begin(); i != res.end(); i++)
     {
